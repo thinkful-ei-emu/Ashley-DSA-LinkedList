@@ -142,9 +142,10 @@ class LinkedList {
   }
 }
 
-let SLL = new LinkedList();
 
-function main(SLL) {
+
+function main() {
+  let SLL = new LinkedList();
   SLL.insertFirst('Apollo');
   SLL.insertLast('Boomer');
   SLL.insertLast('Helo');
@@ -161,7 +162,15 @@ function main(SLL) {
   SLL.insertAt('Kat', 3);
   SLL.remove('Tauhida');
 
-  return SLL;
+
+  console.log(display(SLL));
+  console.log(size(SLL));
+  console.log(isEmpty(SLL));
+  console.log(findPreviousNode(SLL, 'Kat'));
+  console.log(findLastNode(SLL));
+  reverse(SLL);  
+  console.log(display(SLL));
+  
 }
 
 function display(SLL) {
@@ -171,6 +180,7 @@ function display(SLL) {
     list.push(currNode.value);
     currNode = currNode.next;
   }
+  
   return list;
 }
 
@@ -219,9 +229,31 @@ function findLastNode(SLL){
   return tempNode;
 }
 
-main(SLL);
-console.log(display(SLL));
-console.log(size(SLL));
-console.log(isEmpty(SLL));
-console.log(findPreviousNode(SLL, 'Kat'));
-console.log(findLastNode(SLL));
+
+
+
+//Question 4:
+//goes through list and checks to see if value is equal to the next, if it is then skips over node
+//O(n^2)
+
+//Question 5:
+function reverse(SLL){
+  let prev = null;
+  let next = null;
+  let curr = SLL.head;
+
+  while (curr !== null) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+
+    if (next === null){
+      SLL.head = curr;
+    } 
+    curr = next;
+  }  
+  
+}
+
+
+main();
