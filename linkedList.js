@@ -59,9 +59,30 @@ class LinkedList {
       console.log('Item not found');
       return;
     }
-    
+
     let tempNode = currNode;
-    tempNode.next = new _Node(item, currNode.next);    
+    tempNode.next = new _Node(item, currNode.next);
+  }
+
+  insertAt(item, position) {
+    let currNode = this.head;
+    if (position === 0) {
+      this.insertFirst(item);
+      return;
+    }
+    for (let i = 0; i < position - 1; i++) {
+      if (currNode !== null) {     
+        currNode = currNode.next;
+      } 
+      else {
+        console.log("Invalid position");
+        return;
+      }
+    }
+    let tempNode = currNode;    
+    tempNode.next = new _Node(item, currNode.next);
+
+
   }
 
 
@@ -145,11 +166,13 @@ function main() {
   SLL.insertAfter('Helo', 'hotdog');
   //Squirrel does not exist so returns item not found
   // SLL.remove('Squirrel');
+  //index too large
+  SLL.insertAt('Test', 1);
 
 
- 
+
   console.log(JSON.stringify(SLL));
-  
+
 
 }
 
