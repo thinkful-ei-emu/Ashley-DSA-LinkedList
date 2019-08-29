@@ -15,19 +15,19 @@ class LinkedList {
   }
 
   insertBefore(previousItem, newItem) {
+
+  }
+
+  insertAfter(previousItem, newItem) {
     // If the list is empty
     previousItem = this.find(previousItem);
     if (this.head === null) {
       this.insertFirst(newItem);
     }
     else {
-      let tempNode = previousItem;      
+      let tempNode = previousItem;
       tempNode.next = new _Node(newItem, previousItem.next);
     }
-  }
-
-  insertAfter(previousItem, newItem) {
-   
   }
 
 
@@ -105,12 +105,13 @@ function main() {
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
   SLL.insertLast('Tauhida');
-  SLL.insertBefore('Boomer', 'Athena');
+  SLL.insertAfter('Helo', 'hotdog');
   //Squirrel does not exist so returns item not found
   // SLL.remove('Squirrel');
-  SLL.insertAfter('Helo', 'hotdog');
  
-  console.log(SLL.find('Athena'));
+
+  console.log('after helo', SLL.find('Helo').next);
+  console.log('after Hotdog', SLL.find('hotdog').next);
   // console.log(SLL.find('hotdog'));
 
 }
