@@ -14,20 +14,54 @@ class LinkedList {
     this.head = new _Node(item, this.head);
   }
 
-  insertBefore(previousItem, newItem) {
+  insertBefore(targetItem, item) {
+    //A B C F
+    //find f then keep track and check c
+    // two temp nodes (previous, and current)
+    if (this.head === null) {
+      this.insertFirst(item);
+    }
+    // Start at the head
+    let currNode = this.head;
+    // Keep track of previous
+    let previousNode = this.head;
+
+    while ((currNode !== null) && (currNode.value !== targetItem)) {
+      // Save the previous node 
+      previousNode = currNode;
+      currNode = currNode.next;
+    }
+    if (currNode === null) {
+      console.log('Item not found');
+      return;
+    }
+
+    let tempNode = previousNode;
+    tempNode.next = new _Node(item, previousNode.next);
 
   }
 
-  insertAfter(previousItem, newItem) {
-    // If the list is empty
-    previousItem = this.find(previousItem);
+  insertAfter(targetItem, item) {
+    // If the list is empty   
     if (this.head === null) {
-      this.insertFirst(newItem);
+      this.insertFirst(item);
     }
-    else {
-      let tempNode = previousItem;
-      tempNode.next = new _Node(newItem, previousItem.next);
+    // Start at the head
+    let currNode = this.head;
+    // Keep track of previous
+    let previousNode = this.head;
+    while ((currNode !== null) && (currNode.value !== targetItem)) {
+      // Save the previous node 
+      previousNode = currNode;
+      currNode = currNode.next;
     }
+    if (currNode === null) {
+      console.log('Item not found');
+      return;
+    }
+    
+    let tempNode = currNode;
+    tempNode.next = new _Node(item, currNode.next);    
   }
 
 
@@ -105,14 +139,17 @@ function main() {
   SLL.insertLast('Husker');
   SLL.insertLast('Starbuck');
   SLL.insertLast('Tauhida');
+  //inserts athena before boomer
+  SLL.insertBefore('Boomer', 'Athena');
+  //inserts hotdog after helo
   SLL.insertAfter('Helo', 'hotdog');
   //Squirrel does not exist so returns item not found
   // SLL.remove('Squirrel');
- 
 
-  console.log('after helo', SLL.find('Helo').next);
-  console.log('after Hotdog', SLL.find('hotdog').next);
-  // console.log(SLL.find('hotdog'));
+
+ 
+  console.log(JSON.stringify(SLL));
+  
 
 }
 
